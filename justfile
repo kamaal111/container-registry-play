@@ -20,3 +20,9 @@ run:
 
     docker rm $APPLICATION_NAME
     docker run -dp $PORT:$PORT --name $APPLICATION_NAME -e PORT=$PORT $APPLICATION_NAME
+
+tag-image:
+    docker tag gcr.io/$GCP_PROJECT_ID/$APPLICATION_NAME
+
+push-image:
+    docker push gcr.io/$GCP_PROJECT_ID/$APPLICATION_NAME

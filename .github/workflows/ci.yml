@@ -20,11 +20,6 @@ jobs:
       - name: Install just
         uses: taiki-e/install-action@just
 
-      - name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v1
-        with:
-          credentials_json: ${{ secrets.GOOGLE_CREDENTIALS }}
-
       - name: Build image
         run: |
           just build
@@ -34,6 +29,15 @@ jobs:
           GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
         run: |
           just tag-image
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GOOGLE_CREDENTIALS }}
+
+      - name: Configure Docker
+        run: |
+          gcloud auth configure-docker
 
       - name: Push image
         env:

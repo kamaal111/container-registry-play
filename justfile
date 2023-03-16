@@ -22,7 +22,7 @@ run:
     docker run -dp $PORT:$PORT --name $APPLICATION_NAME -e PORT=$PORT $APPLICATION_NAME
 
 tag-image:
-    docker tag $APPLICATION_NAME "gcr.io/$GCP_PROJECT_ID/$APPLICATION_NAME"
+    docker tag $APPLICATION_NAME "gcr.io/$GCP_PROJECT_ID/$APPLICATION_NAME:$COMMIT_SHA"
 
 push-image:
-    docker push "gcr.io/$GCP_PROJECT_ID/$APPLICATION_NAME"
+    docker push "gcr.io/$GCP_PROJECT_ID/$APPLICATION_NAME:$COMMIT_SHA"
